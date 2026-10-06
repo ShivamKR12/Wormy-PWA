@@ -27,7 +27,9 @@ HEAD = 0
 def main():
     global FPSCLOCK, DISPLAYSURF, BASICFONT
 
+    pygame.mixer.pre_init(44100, -16, 2, 1024)
     pygame.init()
+    pygame.mixer.set_num_channels(64)
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
@@ -93,7 +95,7 @@ def runGame():
         drawApple(apple)
         drawScore(len(wormCoords) - 3)
         pygame.display.update()
-        FPSCLOCK.tick(FPS)
+        FPSCLOCK.tick()
 
 def drawPressKeyMsg():
     pressKeySurf = BASICFONT.render('Press a key to play.', True, DARKGRAY)
@@ -136,7 +138,7 @@ def showStartScreen():
             pygame.event.get() # clear event queue
             return
         pygame.display.update()
-        FPSCLOCK.tick(FPS)
+        FPSCLOCK.tick()
         degrees1 += 3
         degrees2 += 7
 
